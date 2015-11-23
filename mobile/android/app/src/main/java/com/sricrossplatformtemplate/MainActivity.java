@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
-        mReactRootView.startReactApplication(mReactInstanceManager, "SriCrossPlatformTemplate", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "JavaBinDemo Alcometer Sri", null);
 
         setContentView(mReactRootView);
     }

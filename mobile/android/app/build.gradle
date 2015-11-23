@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.sricrossplatformtemplate"
+        applicationId "com.kotsbak.javabindemo"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1

@@ -3,7 +3,7 @@ import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import sbt.Keys._
 import sbt.{Build, _}
 
-object SriCrossPlatform extends Build {
+object SriJavaBinDemoCrossPlatform extends Build {
 
   import Dependencies._
   import LauncherConfigs._
@@ -12,7 +12,7 @@ object SriCrossPlatform extends Build {
 
   lazy val commonSettings =
     Seq(
-      organization := "sri.templates",
+      organization := "com.kotsbak",
       version := "0.1.0-SNAPSHOT",
       homepage := Some(url("https://github.com/chandu0101/sri-cross-platform-template")),
       licenses +=("Apache-2.0", url("http://opensource.org/licenses/Apache-2.0")),
@@ -50,7 +50,7 @@ object SriCrossPlatform extends Build {
 
 
   // ================================ Module definitions  ================================ //
-  lazy val SriCrossPlatform = DefProject(".", "root")
+  lazy val SriJavaBinDemoCrossPlatform = DefProject(".", "root")
     .aggregate(universal, web, mobile)
     .configure(addCommandAliases(
     "wt" -> "; test:compile ; web/test",
