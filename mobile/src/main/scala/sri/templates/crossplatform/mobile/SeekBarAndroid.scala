@@ -1,9 +1,10 @@
-package sri.templates.crossplatform.universal.components
+package sri.templates.crossplatform.mobile
 
 import chandu0101.macros.tojs.JSMacro
 import sri.core.React
+
 import scala.scalajs.js
-import js.Dynamic.{global => g}
+import scala.scalajs.js.Dynamic.{global => g}
 import scala.scalajs.js.{UndefOr => U, undefined}
 
 case class SeekBarAndroid(key: U[String] = undefined,

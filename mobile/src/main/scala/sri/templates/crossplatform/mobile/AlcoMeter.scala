@@ -1,6 +1,7 @@
-package sri.templates.crossplatform.universal.components
+package sri.templates.crossplatform.mobile
 
 import sri.core._
+import sri.mobile.components.ios.SliderIOS
 import sri.universal.all._
 import sri.universal.components._
 import sri.universal.styles.UniversalStyleSheet
@@ -11,7 +12,7 @@ import scala.scalajs.js.{UndefOr => U}
 
 object AlcoCalculation {
   def alcoholLevel(numberOfBeers: Int) = {
-    numberOfBeers * 15 / ((80 * 1.7) - (0.15 * 4)) //.toFixed(2)
+    numberOfBeers * 15 / ((80 * 1.7) - (0.15 * 4))
   }
 }
 
@@ -26,6 +27,14 @@ object AlcoMeter {
     View(style = styles.beers)(
       (0 to numberOfBeers - 1) map beerImage
     )
+  }
+
+  def slider(isIos: Boolean, start: Int, max: Int, onChange: Int => Unit) = {
+    isIos match {
+      case true => SliderIOS(style = styles.slider, minimumValue = 0.0, maximumValue = max.toDouble, value = start.toDouble,
+        onValueChange = onChange.compose((v: Double) => v.toInt))()
+      case _ => SeekBarAndroid(style = styles.slider, progress = start, max = max, onChange = onChange)()
+    }
   }
 
   case class State(numberOfBeers: Int = 0)
@@ -45,11 +54,10 @@ object AlcoMeter {
 
         Text(style = styles.centeredText)(s"${state.numberOfBeers} enheter"),
 
-        /** TODO: ios **/
-        SeekBarAndroid(style = styles.slider, progress = 0, max = 16, onChange = { value: Int =>
+        slider(isIOSPlatform, 0, 16, { value: Int =>
           println(value)
-            setState(state.copy(numberOfBeers = value))
-        })(),
+          setState(state.copy(numberOfBeers = value))
+        }),
 
         Text(style = styles.centeredText)("Din promille:"),
         Text(style = styles.alco(state.numberOfBeers))(

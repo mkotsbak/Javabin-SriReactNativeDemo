@@ -3,7 +3,7 @@ package sri.templates.crossplatform.mobile
 import sri.mobile.ReactNative
 import sri.mobile.all._
 import sri.templates.crossplatform.mobile.router.AppRouter
-import sri.templates.crossplatform.universal.components.{AlcoMeter, HelloSri}
+import sri.templates.crossplatform.universal.components.HelloSri
 
 import scala.scalajs.js.JSApp
 

@@ -1,7 +1,8 @@
 package sri.templates.crossplatform.web
 
 import org.scalajs.dom
-import sri.templates.crossplatform.universal.components.{AlcoMeter, HelloSri}
+import sri.templates.crossplatform.mobile.AlcoMeter
+import sri.templates.crossplatform.universal.components.HelloSri
 import sri.templates.crossplatform.web.router.AppRouter
 import sri.web.ReactDOM
 
