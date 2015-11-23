@@ -9,8 +9,13 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.ScalaJSDefined
 import scala.scalajs.js.{UndefOr => U}
 
-object AlcoMeter {
+object AlcoCalculation {
+  def alcoholLevel(numberOfBeers: Int) = {
+    numberOfBeers * 15 / ((80 * 1.7) - (0.15 * 4)) //.toFixed(2)
+  }
+}
 
+object AlcoMeter {
   final val beerURI = ImageSource("http://www.clker.com/cliparts/6/d/0/c/13216380871142975465beer-batter-is-better_1-md.png")
 
   def beerImage(i: Int) = {
@@ -23,20 +28,36 @@ object AlcoMeter {
     )
   }
 
-  @ScalaJSDefined
-  class Component extends ReactComponent[Unit, Unit] {
-    def render() = {
+  case class State(numberOfBeers: Int = 0)
 
+  @ScalaJSDefined
+  class Component extends ReactComponent[Unit, State] {
+
+    initialState(State())
+
+    def render() = {
       val platform = if (isIOSPlatform) "iOS"
       else if (isAndroidPlatform) "Android"
       else "Web"
 
       View(style = styles.container)(
         Text(style = styles.title)(s"JavaBin alkometer med Sri på $platform "),
-        SeekBarAndroid(style = styles.slider, progress = 2, max = 10, onChange = { value: Int =>
+
+        Text(style = styles.centeredText)(s"${state.numberOfBeers} enheter"),
+
+        /** TODO: ios **/
+        SeekBarAndroid(style = styles.slider, progress = 0, max = 16, onChange = { value: Int =>
           println(value)
+            setState(state.copy(numberOfBeers = value))
         })(),
-        beerImages(3),
+
+        Text(style = styles.centeredText)("Din promille:"),
+        Text(style = styles.alco(state.numberOfBeers))(
+          AlcoCalculation.alcoholLevel(state.numberOfBeers).formatted("%.2f") + " %"
+        ),
+
+        beerImages(state.numberOfBeers),
+
         Text(style = styles.centeredText)("Scala.js - Future of app development!")
       )
     }
@@ -77,9 +98,13 @@ object AlcoMeter {
       width := 80,
       height := 100)
 
-    val alco = style(
+    private def colorPrefix(numberOfBeers: Int) = numberOfBeers * 255 / 15
+
+    def alco(numberOfBeers: Int) = style(
       fontSize := 30,
-      fontWeight.bold
+      fontWeight.bold,
+      alignSelf.center,
+      color := s"rgb(${colorPrefix(numberOfBeers)}, 0, 0)"
     )
   }
 
