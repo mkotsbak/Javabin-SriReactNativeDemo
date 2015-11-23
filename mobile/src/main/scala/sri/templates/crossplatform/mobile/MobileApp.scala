@@ -15,6 +15,6 @@ object MobileApp extends JSApp {
     val root = createMobileRoot(
       AlcoMeter()
     )
-    ReactNative.AppRegistry.registerComponent("SriCrossPlatformTemplate", () => root)
+    ReactNative.AppRegistry.registerComponent("JavaBinDemoAlcometerSri", () => root)
   }
 }

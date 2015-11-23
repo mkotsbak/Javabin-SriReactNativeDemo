@@ -15,6 +15,7 @@ object AlcoMeter {
 
   def beerImage(i: Int) = {
     Image(style = styles.beerImage, source = beerURI, key = i.toString)()
+
   }
   def beerImages(numberOfBeers: Int) = {
     View(style = styles.beers)(
@@ -32,6 +33,9 @@ object AlcoMeter {
 
       View(style = styles.container)(
         Text(style = styles.title)(s"JavaBin alkometer med Sri på $platform "),
+        SeekBarAndroid(style = styles.slider, progress = 2, max = 10, onChange = { value: Int =>
+          println(value)
+        })(),
         beerImages(3),
         Text(style = styles.centeredText)("Scala.js - Future of app development!")
       )
