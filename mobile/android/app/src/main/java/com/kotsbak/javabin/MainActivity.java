@@ -1,4 +1,4 @@
-package com.sricrossplatformtemplate;
+package com.kotsbak.javabin;
 
 import android.app.Activity;
 import android.os.Bundle;

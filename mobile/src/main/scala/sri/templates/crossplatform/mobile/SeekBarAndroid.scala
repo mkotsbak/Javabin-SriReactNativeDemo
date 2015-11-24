@@ -18,5 +18,4 @@ case class SeekBarAndroid(key: U[String] = undefined,
         val f = React.createFactory(seekBarAndroid)
         f(props)
     }
-
 }
